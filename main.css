@@ -1,0 +1,8 @@
+#questions {
+	background-color: greenyellow;
+	padding: 10px 0;
+	height: 180px;
+}
+.individualQuestion {
+	display: none;
+}
