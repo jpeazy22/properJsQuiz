@@ -11,26 +11,26 @@ var quiz = [
 		choices: ["simple cuboidal", "simple squamous", "transitional", "simple columnar"],
 		correctAnswer:3
 	},
-	{
-		question: "Epithelium that appears layered due to the varying levels at which nuclei are found in cells, but in reality is not layered, is _________________.",
-		choices: ["transitional epithelium", "pseudostratified columnar epithelium", "stratified squamous epithelium", "stratified columnar epithelium"],
-		correctAnswer:1
-	},
-	{
-		question: "The outer layer of the skin is composed of ______________________.",
-		choices: ["transitional epithelium", "pseudostratified columnar epithelium", "stratified squamous epithelium", "stratified columnar epithelium"],
-		correctAnswer:2
-	},
-	{
-		question: "The primary purpose of stratification, or layering, in epithelial tissue is for increased _____________.",
-		choices: ["protection", "secretion", "absorption", "thickening of the basement membrane"],
-		correctAnswer:0
-	},
-	{
-		question: "What type of epithelium lines the urinary bladder and is capable of distention?",
-		choices: ["stratified cuboidal epithelium", "stratified squamous epithelium", "transitional epithelium", "stratified columnar epithelium"],
-		correctAnswer:2
-	},
+	// {
+	// 	question: "Epithelium that appears layered due to the varying levels at which nuclei are found in cells, but in reality is not layered, is _________________.",
+	// 	choices: ["transitional epithelium", "pseudostratified columnar epithelium", "stratified squamous epithelium", "stratified columnar epithelium"],
+	// 	correctAnswer:1
+	// },
+	// {
+	// 	question: "The outer layer of the skin is composed of ______________________.",
+	// 	choices: ["transitional epithelium", "pseudostratified columnar epithelium", "stratified squamous epithelium", "stratified columnar epithelium"],
+	// 	correctAnswer:2
+	// },
+	// {
+	// 	question: "The primary purpose of stratification, or layering, in epithelial tissue is for increased _____________.",
+	// 	choices: ["protection", "secretion", "absorption", "thickening of the basement membrane"],
+	// 	correctAnswer:0
+	// },
+	// {
+	// 	question: "What type of epithelium lines the urinary bladder and is capable of distention?",
+	// 	choices: ["stratified cuboidal epithelium", "stratified squamous epithelium", "transitional epithelium", "stratified columnar epithelium"],
+	// 	correctAnswer:2
+	// },
 	{
 		question: "An exocrine gland that loses small parts of its cell bodies during secretion, as is the case for the mammary gland, is further classified as a(n) ____________ gland.",
 		choices: ["merocrine", "apocrine", "holocrine", "endocrine"],
@@ -41,30 +41,51 @@ var quiz = [
 var html = "<div>";
 	html+="<ul>";
    		for (var i = 0; i < quiz.length; i++) {
-    		html+="<li class=individualQuestion><h4>"+quiz[i].question+"</h4>";
+    		html+="<li data-questions-index=" + i + " class=individualQuestion><h4>"+quiz[i].question+"</h4>";
 			for(var j = 0; j < quiz[i].choices.length; j++) {
-				html+="<input type = radio name=quizChoices> " + quiz[i].choices[j]+ "</input><br>";
+				html+="<input type = radio name=quizChoices_" + i + " value=" + j + "> " + quiz[i].choices[j]+ "</input><br>";
+				// console.log("quiz choices", quiz[i].choices[j]);
+				$("#quizItem_" + i + " input").on('click', function(){
+					console.log("a value", $(this).val());
+				});
 			}
 			html+="</li>";
-	//    console.log(quiz[i].choices);
-	//    html+="<p>"+quiz[i].correctAnswer+"</p>";
-   }
-   	html+="</ul>";
+		}
+		
+	html+="</ul>";
 html+="</div>";
 document.getElementById("questions").innerHTML = html;
 
+$('.individualQuestion input').on('click', function() {
+	var selectedAnswer = parseInt($(this).val()),
+		questionIndex = $(this).closest('li').data('questions-index'),
+		correctAnswer = quiz[questionIndex].correctAnswer;
+	if(selectedAnswer === correctAnswer){
+		console.log('true');
+	} else {
+		console.log('false');
+	}
+});
+
 var counter = 1;
-$(".individualQuestion:nth-child(" + counter + ")").show();
+var radioCheck = document.getElementsByName('quizChoices_i');
+$(".individualQuestion:nth-child(" + counter + ")").fadeIn('slow');
 $("#next").click(function(){
-	$(".individualQuestion:nth-child(" + counter + ")").hide();
-	counter++; 
-	$(".individualQuestion:nth-child(" + counter + ")").show();
+	if(counter < quiz.length) {
+		itemSelected = true;
+		counter++; 
+		$(".individualQuestion").hide();
+		$(".individualQuestion:nth-child(" + counter + ")").fadeIn('slow');
+	}
 });
-$("#back").click(function(){
-	$(".individualQuestion:nth-child(" + counter + ")").hide();
-	counter--; 
-	$(".individualQuestion:nth-child(" + counter + ")").show();
+$("#previous").click(function(){
+	if(counter > 1) {
+		counter--; 
+		$(".individualQuestion").hide();
+		$(".individualQuestion:nth-child(" + counter + ")").fadeIn('slow');
+	}
 });
+
 
 
 
