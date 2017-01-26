@@ -10,7 +10,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="main.css" rel="stylesheet">
 	
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,21 +22,33 @@
 			<div class="container-fluid">
 	    		<div class="navbar-header">
 	      			<a class="navbar-brand" href="#">
-        				Dr. Smee
+        				Quiz Master
 	      			</a>
 	    		</div>
 	  		</div>
 		</nav>
+		<div id="intro" id="form" onsubmit="return false;">
+			<h3> Welcome!  </h3>
+			<p>Please enter your name to get started.</p>
+			<p><input type="text" name="name" id="userName"></input></p>
+			<!-- <p>Click button below to get started.</p> -->
+			<button id="login" class="btn btn-info" type="submit" onclick="userName();">Log In</button>
+		</div>
 		<div class="container">
 			<div>
+				<!-- text being added to h4 by jquery -->
+				<h4 id="userLoginName"></h4>
 				<hr>
-				<div id="questions"></div>
+				<div id="questions">
+				</div>
+				<div id="score"></div>
 				<hr>
-				<button id="previous">Back</button>
-				<button id="next">Next</button>
-				<button id="submit">Submit</button>
+				<button id="previous" class="btn btn-info">Back</button>
+				<button id="next" class="btn btn-info">Next</button>
+				<!-- <button id="restart"><a href="#">Try Again</a></button> -->
+				<input id="restart" class="btn btn-info" type="button" value="Try Again" onClick="window.location.reload()">
+				<button id="submit" class="btn btn-danger">Get Score</button>
 			</div>
-			<div id="score"></div>
 		</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

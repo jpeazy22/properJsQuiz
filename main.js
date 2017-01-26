@@ -1,39 +1,39 @@
 var Universal = {};
 
 var quiz = [
+	// {
+	// 	question: "The average person does what thirteen times a day?",
+	// 	choices: ["Yawns", "Yells", "Laughs", "Cries"],
+	// 	correctAnswer:2
+	// },
+	// {
+	// 	question: "The Average American does what 22 times a day?",
+	// 	choices: ["Calls a friend", "Walks Dog", "Sits Down", "Opens Fridge"],
+	// 	correctAnswer:3
+	// },
+	// {
+	// 	question: "What is Johnny Depp afraid of?",
+	// 	choices: ["Black Cats", "Clowns", "Pirates", "Little Children"],
+	// 	correctAnswer:1
+	// },
+	// {
+	// 	question: "In California you can't legally buy a mousetrap without having a what?",
+	// 	choices: ["A parent present", "Liability Waiver", "Hunting License", "Drivers License"],
+	// 	correctAnswer:2
+	// },
 	{
-		question: "Epithelial tissue is characterized by each of these traits, except that ____________.",
-		choices: ["it lacks blood vessels", "it functions in secretion, absorption, and excretion", "epithelial cells are loosely packed and have much intercellular material", "it is anchored to a basement membrane"],
-		correctAnswer:2
-	},
-	{
-		question: "Microvilli, which function to increase surface area, are more likely to be found in ____________ epithelium.",
-		choices: ["simple cuboidal", "simple squamous", "transitional", "simple columnar"],
-		correctAnswer:3
-	},
-	{
-		question: "Epithelium that appears layered due to the varying levels at which nuclei are found in cells, but in reality is not layered, is _________________.",
-		choices: ["transitional epithelium", "pseudostratified columnar epithelium", "stratified squamous epithelium", "stratified columnar epithelium"],
-		correctAnswer:1
-	},
-	{
-		question: "The outer layer of the skin is composed of ______________________.",
-		choices: ["transitional epithelium", "pseudostratified columnar epithelium", "stratified squamous epithelium", "stratified columnar epithelium"],
-		correctAnswer:2
-	},
-	{
-		question: "The primary purpose of stratification, or layering, in epithelial tissue is for increased _____________.",
-		choices: ["protection", "secretion", "absorption", "thickening of the basement membrane"],
+		question: "In Kansas it's illegal to eat cherry pie with what?",
+		choices: ["Ice cream", "Whip cream", "Fork", "Spoon"],
 		correctAnswer:0
 	},
 	{
-		question: "What type of epithelium lines the urinary bladder and is capable of distention?",
-		choices: ["stratified cuboidal epithelium", "stratified squamous epithelium", "transitional epithelium", "stratified columnar epithelium"],
+		question: "What was the first puck used, in the game of ice hockey, made of?",
+		choices: ["Round wood chip", "Flattened tin can", "Frozen cow manure", "Rock"],
 		correctAnswer:2
 	},
 	{
-		question: "An exocrine gland that loses small parts of its cell bodies during secretion, as is the case for the mammary gland, is further classified as a(n) ____________ gland.",
-		choices: ["merocrine", "apocrine", "holocrine", "endocrine"],
+		question: "It's illegal in Texas to put what on your neighbors Cow?",
+		choices: ["Bell", "Graffiti", "Blanket", "Bow"],
 		correctAnswer:1
 	}
 ];
@@ -44,7 +44,6 @@ var html = "<div>";
     		html+="<li data-questions-index=" + i + " class=individualQuestion><h4>"+quiz[i].question+"</h4>";
 			for(var j = 0; j < quiz[i].choices.length; j++) {
 				html+="<input class=radioOptions type = radio name=quizChoices_" + i + " value=" + j + "> " + quiz[i].choices[j]+ "</input><br>";
-				//console.log("quiz choices", quiz[i].choices[j].checked);
 				$("#quizItem_" + i + " input").on('click', function(){
 					console.log("a value", $(this).val());
 				});
@@ -57,66 +56,98 @@ html+="</div>";
 document.getElementById("questions").innerHTML = html;
 
 var totalQuestions = $('.individualQuestion').length;
+console.log(totalQuestions);
 var totalCorrect = 0;
+
+var scoreArray = [];
 $('.individualQuestion input').on('click', function() {
 	var selectedAnswer = parseInt($(this).val()),
 		questionIndex = $(this).closest('li').data('questions-index'),
 		correctAnswer = quiz[questionIndex].correctAnswer;
-		
-		console.log("selectedAnswer", selectedAnswer);
-		console.log("questionIndex", questionIndex);
-		console.log("correctAnswer", correctAnswer);
-		console.log("input", $('.individualQuestion').val());
-		
-    
 	if(selectedAnswer === correctAnswer){
-	  	totalCorrect ++;
-		document.getElementById('score').innerHTML = totalCorrect + "/ " + totalQuestions + " " + Math.floor(totalCorrect/totalQuestions * 100) + "%";
-	    console.log('total correct', totalCorrect);
-		console.log('correct');
+		scoreArray[questionIndex] = true;
 	} else {
-		console.log('false');
+		scoreArray[questionIndex] = false;
+	}
+	
+	var scoreArrayLength = scoreArray.length;
+	var trueScore = [];
+	for (var i = 0; i < scoreArrayLength; i++) {
+		if(scoreArray[i] === true ){
+			trueScore.push(scoreArray[i]);
+		}
+		totalCorrect = trueScore.length;
 	}
 	return selectedAnswer;
 });
 
+// hide next button after last question
 var counter = 1;
-console.log(totalQuestions);
 if(counter < totalQuestions){
 	$('#next').show();
-} else if (counter === totalQuestions) {
+} else if (counter === totalQuestions - 1) {
 	$('#next').hide();
 }
-var radioCheck = document.getElementsByName('quizChoices_i');
+
+
 $(".individualQuestion:nth-child(" + counter + ")").fadeIn('slow');
-$('#submit').hide();
+
 $("#next").click(function(event){
-	var answerSelected = $('.radioOptions').is(':checked');
-	console.log("is answer selected", answerSelected);
+	var answerSelected = $('[data-questions-index="'+ (counter - 1) + '"] .radioOptions').is(':checked');
 	if(answerSelected === true && counter < quiz.length) {
-		// console.log(radioCheck);
-		counter++; 
+		counter++;
+		$('#previous').show();
 		$('#submit').hide();
 		$(".individualQuestion").hide();
 		$(".individualQuestion:nth-child(" + counter + ")").fadeIn('slow');
 	} else if(answerSelected === true && counter === quiz.length) {
 		$('#submit').show();
+		$("#next").hide();
 	} else {
 		event.preventDefault();
 		alert("You must select an answer before moving to the next question.");
+		return false;
 	}
 });
+
 $("#previous").click(function(){
 	if(counter > 1) {
 		counter--; 
 		$(".individualQuestion").hide();
 		$(".individualQuestion:nth-child(" + counter + ")").fadeIn('slow');
 		$('#submit').hide();
+		$("#next").show();
+		$('#questions').show();
+		$('#score').hide();
 	};
 });
 
+$('#submit').click(function() {
+	$(".individualQuestion").hide();
+	$('#questions').hide();
+	$('#score').show();
+	$('#previous').hide();
+	$('#restart').show();
+	$('#submit').hide();
+	var htmlScore = "<div>";
+		htmlScore+="<h4>You've answered " + totalCorrect + " correct out of " + totalQuestions + " total.</h4> <br> <h2>" + Math.floor(totalCorrect/totalQuestions * 100) + "%</h2>";
+	htmlScore+="</div>";
+	document.getElementById('score').innerHTML = htmlScore;
+});
+
+function userName() {
+	var input = document.getElementById("userName").value;
+	// alert(input);
+	console.log(input);
+	$('#userLoginName').text("Good Luck " + input + "!");
+	// return input;
+	
+}
+var login = document.getElementById('login');
+// login.addEventListener('click', getUserName, false);
 
 
-
-
-
+$('#login').click(function() {
+		$('#intro').hide();
+		$('.container').show();
+});

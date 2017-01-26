@@ -1,16 +1,40 @@
+#intro {
+	text-align: center;
+	padding-top: 50px;
+}
+#intro button {
+	margin-top: 50px;
+}
+
+.container {
+	display: none;
+}
 #questions {
 	background-color: greenyellow;
 	padding: 10px 0;
 	height: 180px;
-	/*height: auto;*/
+}
+#questions ul {
+	list-style-type: none;
+}
+#score {
+	background-color: yellow;
+	padding: 10px 0;
+	height: 180px;
+	display: none;
+	text-align: center;
 }
 .individualQuestion {
 	display: none;
 }
-/*#previous {
-	display: none;
-}*/
 #submit {
 	float:right;
+	display: none;
+}
+#restart {
+	float:right;
+	display: none;
+}
+#previous {
 	display: none;
 }
