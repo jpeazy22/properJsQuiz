@@ -38,6 +38,10 @@ var quiz = [
 	}
 ];
 
+$('document').ready(function () {
+	$('#userNameContainer').text(getUserName('input'));
+});
+
 var html = "<div>";
 	html+="<ul>";
    		for (var i = 0; i < quiz.length; i++) {
@@ -137,15 +141,20 @@ $('#submit').click(function() {
 
 function userName() {
 	var input = document.getElementById("userName").value;
-	// alert(input);
-	console.log(input);
 	$('#userLoginName').text("Good Luck " + input + "!");
-	// return input;
-	
+	localStorage.setItem('input', input);
 }
-var login = document.getElementById('login');
+
+var login = $('#login');
 // login.addEventListener('click', getUserName, false);
 
+function getUserName (userNameElement) {
+	var userName = localStorage.getItem(userNameElement);
+	if (userName) {
+		console.log(userName);
+		return userName;
+	}
+}
 
 $('#login').click(function() {
 		$('#intro').hide();
