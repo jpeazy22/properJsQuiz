@@ -1,26 +1,26 @@
 var Universal = {};
 
 var quiz = [
-	// {
-	// 	question: "The average person does what thirteen times a day?",
-	// 	choices: ["Yawns", "Yells", "Laughs", "Cries"],
-	// 	correctAnswer:2
-	// },
-	// {
-	// 	question: "The Average American does what 22 times a day?",
-	// 	choices: ["Calls a friend", "Walks Dog", "Sits Down", "Opens Fridge"],
-	// 	correctAnswer:3
-	// },
-	// {
-	// 	question: "What is Johnny Depp afraid of?",
-	// 	choices: ["Black Cats", "Clowns", "Pirates", "Little Children"],
-	// 	correctAnswer:1
-	// },
-	// {
-	// 	question: "In California you can't legally buy a mousetrap without having a what?",
-	// 	choices: ["A parent present", "Liability Waiver", "Hunting License", "Drivers License"],
-	// 	correctAnswer:2
-	// },
+	{
+		question: "The average person does what thirteen times a day?",
+		choices: ["Yawns", "Yells", "Laughs", "Cries"],
+		correctAnswer:2
+	},
+	{
+		question: "The Average American does what 22 times a day?",
+		choices: ["Calls a friend", "Walks Dog", "Sits Down", "Opens Fridge"],
+		correctAnswer:3
+	},
+	{
+		question: "What is Johnny Depp afraid of?",
+		choices: ["Black Cats", "Clowns", "Pirates", "Little Children"],
+		correctAnswer:1
+	},
+	{
+		question: "In California you can't legally buy a mousetrap without having a what?",
+		choices: ["A parent present", "Liability Waiver", "Hunting License", "Drivers License"],
+		correctAnswer:2
+	},
 	{
 		question: "In Kansas it's illegal to eat cherry pie with what?",
 		choices: ["Ice cream", "Whip cream", "Fork", "Spoon"],
@@ -43,24 +43,22 @@ $('document').ready(function () {
 });
 
 var html = "<div>";
-	html+="<ul>";
-   		for (var i = 0; i < quiz.length; i++) {
-    		html+="<li data-questions-index=" + i + " class=individualQuestion><h4>"+quiz[i].question+"</h4>";
-			for(var j = 0; j < quiz[i].choices.length; j++) {
-				html+="<input class=radioOptions type = radio name=quizChoices_" + i + " value=" + j + "> " + quiz[i].choices[j]+ "</input><br>";
-				$("#quizItem_" + i + " input").on('click', function(){
-					console.log("a value", $(this).val());
-				});
+		html+="<ul>";
+	   		for (var i = 0; i < quiz.length; i++) {
+	    		html+="<li data-questions-index=" + i + " class=individualQuestion><h4>"+quiz[i].question+"</h4>";
+				for(var j = 0; j < quiz[i].choices.length; j++) {
+					html+="<input class=radioOptions type = radio name=quizChoices_" + i + " value=" + j + "> " + quiz[i].choices[j]+ "</input><br>";
+					$("#quizItem_" + i + " input").on('click', function(){
+						console.log("a value", $(this).val());
+					});
+				}
+				html+="</li>";
 			}
-			html+="</li>";
-		}
-		
-	html+="</ul>";
-html+="</div>";
+		html+="</ul>";
+	html+="</div>";
 document.getElementById("questions").innerHTML = html;
 
 var totalQuestions = $('.individualQuestion').length;
-console.log(totalQuestions);
 var totalCorrect = 0;
 
 var scoreArray = [];
@@ -151,7 +149,6 @@ var login = $('#login');
 function getUserName (userNameElement) {
 	var userName = localStorage.getItem(userNameElement);
 	if (userName) {
-		console.log(userName);
 		return userName;
 	}
 }

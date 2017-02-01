@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quiz Master</title>
-
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Quiz Master</title>
+	
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="main.css" rel="stylesheet">
 	
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-	    		<div class="navbar-header">
-	      			<a class="navbar-brand" href="#">
-        				Quiz Master
-	      			</a>
-	    		</div>
-	  		</div>
-		</nav>
-		<div id="intro" id="form" onsubmit="return false;">
-			<h3> Welcome <span id="userNameContainer"></span>!</h3>
-			<p>Please enter your name to get started.</p>
-			<p><input type="text" name="name" id="userName"></input></p>
-			<!-- <p>Click button below to get started.</p> -->
-			<button id="login" class="btn btn-info" type="submit" onclick="userName();">Log In</button>
-		</div>
-		<div class="container">
-			<div>
-				<!-- text being added to h4 by jquery -->
-				<h4 id="userLoginName"></h4>
-				<hr>
-				<div id="questions">
-				</div>
-				<div id="score"></div>
-				<hr>
-				<button id="previous" class="btn btn-info">Back</button>
-				<button id="next" class="btn btn-info">Next</button>
-				<!-- <button id="restart"><a href="#">Try Again</a></button> -->
-				<input id="restart" class="btn btn-info" type="button" value="Try Again" onClick="window.location.reload()">
-				<button id="submit" class="btn btn-danger">Get Score</button>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					Quiz Master
+				</a>
 			</div>
 		</div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+	</nav>
+	<div id="intro" id="form" onsubmit="return false;">
+		<h3> Welcome <span id="userNameContainer"></span>!</h3>
+		<p>Please enter your name to get started.</p>
+		<p><input type="text" name="name" id="userName"></input></p>
+		<!-- <p>Click button below to get started.</p> -->
+		<button id="login" class="btn btn-info" type="submit" onclick="userName();">Log In</button>
+	</div>
+	<div class="container">
+		<div>
+			<!-- text being added to h4 by jquery -->
+			<h4 id="userLoginName"></h4>
+			<hr>
+			<div id="questions">
+			</div>
+			<div id="score"></div>
+			<hr>
+			<button id="previous" class="btn btn-info">Back</button>
+			<button id="next" class="btn btn-info">Next</button>
+			<!-- <button id="restart"><a href="#">Try Again</a></button> -->
+			<input id="restart" class="btn btn-info" type="button" value="Try Again" onClick="window.location.reload()">
+			<button id="submit" class="btn btn-danger">Get Score</button>
+		</div>
+	</div>
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
 	<script src="main.js"></script>
-  </body>
+</body>
 </html>
